@@ -2,11 +2,13 @@ const std = @import("std");
 
 pub fn build(b: *std.build.Builder) void {
     const target = b.standardTargetOptions(.{});
-    const mode = b.standardReleaseOptions();
+    const optimize = b.standardOptimizeOption(.{});
 
-    const lib = b.addStaticLibrary("zfp", null);
-    lib.setTarget(target);
-    lib.setBuildMode(mode);
+    const lib = b.addStaticLibrary(.{
+        .name = "zfp",
+        .target = target,
+        .optimize = optimize,
+    });
     lib.addCSourceFiles(&.{
         "src/bitstream.c",
         "src/decode1d.c",
