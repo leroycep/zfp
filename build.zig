@@ -47,8 +47,8 @@ pub fn build(b: *std.build.Builder) void {
         "src/share/parallel.c",
         "src/zfp.c",
     }, &.{});
-    lib.install();
     lib.addIncludePath("include");
     lib.linkLibC();
     lib.installHeadersDirectory("include", "");
+    b.installArtifact(lib);
 }
